@@ -1,0 +1,19 @@
+{
+    "name": "belief/hyperf-repository",
+    "type": "library",
+    "require": {
+        "php": "^7.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiaqiancheng",
+            "email": "qiancheng1019@foxmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Belief\\Hyperf\\": "src/"
+        }
+    }
+}

@@ -155,7 +155,7 @@ trait RepositoryTools
         }
 
         if (is_array($cols) && $cols[0] != '*') {
-            $instance->select($cols);
+            $instance = $instance->select($cols);
         }
 
         if (! empty($order_by) || ! is_array($order_by)) {
@@ -188,7 +188,7 @@ trait RepositoryTools
         }
 
         if (is_array($cols) && $cols[0] != '*') {
-            $instance->select($cols);
+            $instance = $instance->select($cols);
         }
 
         if (! empty($order_by) || ! is_array($order_by)) {
@@ -224,7 +224,7 @@ trait RepositoryTools
         }
 
         if (is_array($cols) && $cols[0] != '*') {
-            $instance->select($cols);
+            $instance = $instance->select($cols);
         }
 
         if ($total) {
@@ -271,7 +271,7 @@ trait RepositoryTools
         }
 
         if (is_array($cols) && $cols[0] != '*') {
-            $instance->select($cols);
+            $instance = $instance->select($cols);
         }
 
         if ($total) {

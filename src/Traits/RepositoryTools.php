@@ -18,10 +18,11 @@ trait RepositoryTools
      * 通过主键id/ids获取信息.
      *
      * @param array|int $id id/id数组
+     * @param array $cols 查询的列
      * @param bool $useCache 是否使用模型缓存
      * @return array 查询信息
      */
-    public function find($id, $useCache = true)
+    public function find($id, $cols = ['*'], $useCache = false)
     {
         $instance = $this->getModel();
 
@@ -29,9 +30,14 @@ trait RepositoryTools
             $modelCache = is_array($id) ? $instance->findManyFromCache($id) : $instance->findFromCache($id);
             return isset($modelCache) && $modelCache ? $modelCache->toArray() : [];
         }
-        $query = $instance->query()->find($id);
 
-        return $query ? $query->toArray() : [];
+        $query = $instance->query();
+        if (is_array($cols) && $cols[0] != '*') {
+            $query->select($cols);
+        }
+
+        $result = $query->find($id);
+        return  $result ? $result->toArray() : [];
     }
 
     /**
@@ -49,7 +55,7 @@ trait RepositoryTools
         if (is_array($cols) && $cols[0] != '*') {
             $query->select($cols);
         }
-        $result = $instance->find($id);
+        $result = $query->find($id);
         return $result ? $result->toArray() : [];
     }
 

@@ -154,14 +154,16 @@ trait RepositoryTools
     {
         $instance = $this->getModel();
 
+        if (is_array($cols) && $cols[0] != '*') {
+            $instance = $instance->select($cols);
+        } else {
+            $instance = $instance->select();
+        }
+
         if (is_array($filter) && ! empty($filter)) {
             foreach ($filter as $k => $v) {
                 $instance = $this->whereFunc($k, $v, $instance);
             }
-        }
-
-        if (is_array($cols) && $cols[0] != '*') {
-            $instance = $instance->select($cols);
         }
 
         if (! empty($order_by) || ! is_array($order_by)) {
@@ -187,14 +189,16 @@ trait RepositoryTools
     {
         $instance = $this->getModel()->withTrashed();
 
+        if (is_array($cols) && $cols[0] != '*') {
+            $instance = $instance->select($cols);
+        } else {
+            $instance = $instance->select();
+        }
+
         if (is_array($filter) && ! empty($filter)) {
             foreach ($filter as $k => $v) {
                 $instance = $this->whereFunc($k, $v, $instance);
             }
-        }
-
-        if (is_array($cols) && $cols[0] != '*') {
-            $instance = $instance->select($cols);
         }
 
         if (! empty($order_by) || ! is_array($order_by)) {
@@ -223,14 +227,16 @@ trait RepositoryTools
     {
         $instance = $this->getModel()->withTrashed();
 
+        if (is_array($cols) && $cols[0] != '*') {
+            $instance = $instance->select($cols);
+        } else {
+            $instance = $instance->select();
+        }
+
         if (is_array($filter) && ! empty($filter)) {
             foreach ($filter as $k => $v) {
                 $instance = $this->whereFunc($k, $v, $instance);
             }
-        }
-
-        if (is_array($cols) && $cols[0] != '*') {
-            $instance = $instance->select($cols);
         }
 
         if ($total) {
@@ -270,14 +276,16 @@ trait RepositoryTools
     {
         $instance = $this->getModel();
 
+        if (is_array($cols) && $cols[0] != '*') {
+            $instance = $instance->select($cols);
+        } else {
+            $instance = $instance->select();
+        }
+
         if (is_array($filter) && ! empty($filter)) {
             foreach ($filter as $k => $v) {
                 $instance = $this->whereFunc($k, $v, $instance);
             }
-        }
-
-        if (is_array($cols) && $cols[0] != '*') {
-            $instance = $instance->select($cols);
         }
 
         if ($total) {

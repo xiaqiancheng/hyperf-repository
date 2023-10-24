@@ -166,7 +166,7 @@ trait RepositoryTools
             }
         }
 
-        if (! empty($order_by) || ! is_array($order_by)) {
+        if (! empty($order_by) && is_array($order_by)) {
             foreach ($order_by as $field => $ascdesc) {
                 $instance->orderBy($field, $ascdesc);
             }
@@ -201,7 +201,7 @@ trait RepositoryTools
             }
         }
 
-        if (! empty($order_by) || ! is_array($order_by)) {
+        if (! empty($order_by) && is_array($order_by)) {
             foreach ($order_by as $field => $ascdesc) {
                 $instance->orderBy($field, $ascdesc);
             }
@@ -243,7 +243,7 @@ trait RepositoryTools
             $count = $this->getCount($filter);
         }
 
-        if (! empty($order_by) || ! is_array($order_by)) {
+        if (! empty($order_by) && is_array($order_by)) {
             foreach ($order_by as $field => $ascdesc) {
                 $instance->orderBy($field, $ascdesc);
             }
@@ -270,9 +270,10 @@ trait RepositoryTools
      * @param int $page 页码
      * @param int $page_size 每页数量
      * @param array $order_by 排序方式
+     * @param array $group_by 分组
      * @param bool $total 是否查询数量
      */
-    public function getList($filter, $cols = ['*'], $page = 1, $page_size = 10, $order_by = [], $total = true)
+    public function getList($filter, $cols = ['*'], $page = 1, $page_size = 10, $order_by = [], $group_by = [], $total = true)
     {
         $instance = $this->getModel();
 
@@ -292,10 +293,15 @@ trait RepositoryTools
             $count = $this->getCount($filter);
         }
 
-        if (! empty($order_by) || ! is_array($order_by)) {
+        if (! empty($order_by) && is_array($order_by)) {
             foreach ($order_by as $field => $ascdesc) {
                 $instance->orderBy($field, $ascdesc);
             }
+        }
+
+        if (! empty($group_by) && is_array($group_by)) {
+            $groupBy = implode(',', $group_by);
+            $instance->groupBy($groupBy);
         }
 
         if ($page > 0) {
